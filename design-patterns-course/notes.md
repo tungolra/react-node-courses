@@ -29,5 +29,6 @@
     - adapting localstorage to nodejs
 - 3.3: using a proxy to use an interface that delays instantiation of expensive object and control requests made to that object
 - 3.5: The Composite pattern: organize objects in a way that treats leafs and branches uniformly
-    - 
+- 3.7: Decorator pattern: attach additional responsibilities to an object dynamically as alternative to subclassing for extending functionality
+
 ## Ch 2: Behavioural Patterns 
