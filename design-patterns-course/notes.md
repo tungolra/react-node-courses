@@ -37,3 +37,5 @@
 - 4.3: Command pattern: encapsulating request as an object
 - 4.6: Iterator pattern: providing a way to access elements of an aggregate object sequentially w/o exposing its underlying representation
     - designed to work with collections of data by providing way to access first data record and to iterate through rest of the rows in data set 
+- 4.8: Observer pattern: objects called observers can watch other objects for state changes (observables) 
+    - defining a 1:M dependency btwn objects
