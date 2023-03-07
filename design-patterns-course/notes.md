@@ -27,4 +27,5 @@
 - 3.1: The Adapter pattern 
     - take an object, keep its interface, adapt it to new environment or solution; adaptors make incompatible classes become compatible
     - adapting localstorage to nodejs
+- 3.3: using a proxy to use an interface that delays instantiation of expensive object and control requests made to that object
 ## Ch 2: Behavioural Patterns 
