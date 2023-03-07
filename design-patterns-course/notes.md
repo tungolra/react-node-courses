@@ -17,11 +17,14 @@
     - callback chaos
 
 ## Ch 2: Creational Patterns 
-- 
-    - 2.1-3: The Singleton problem: creating multiple instances of one object 
-        - refactoring by exporting instance itself or creating a Singleton class with getInstance() method
-    - ch 2.4-5: using Prototype pattern to create similar instances of object
-    - ch 2.6: Factory method: encapsulating constructors into a single module and creating a function that will create object for us; subclasses decide which class to instantiate 
-    - ch 2.7: Builder pattern fixes teloscopic constructor problem - a constructor with too many arguments 
-## Ch 2: Structural Patterns 
+
+- 2.1-3: The Singleton problem: creating multiple instances of one object 
+    - refactoring by exporting instance itself or creating a Singleton class with getInstance() method
+- ch 2.4-5: using Prototype pattern to create similar instances of object
+- ch 2.6: Factory method: encapsulating constructors into a single module and creating a function that will create object for us; subclasses decide which class to instantiate 
+- ch 2.7: Builder pattern fixes teloscopic constructor problem - a constructor with too many arguments 
+## Ch 3: Structural Patterns 
+- 3.1: The Adapter pattern 
+    - take an object, keep its interface, adapt it to new environment or solution; adaptors make incompatible classes become compatible
+    - adapting localstorage to nodejs
 ## Ch 2: Behavioural Patterns 
