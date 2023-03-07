@@ -39,3 +39,5 @@
     - designed to work with collections of data by providing way to access first data record and to iterate through rest of the rows in data set 
 - 4.8: Observer pattern: objects called observers can watch other objects for state changes (observables) 
     - defining a 1:M dependency btwn objects
+- 4.10: Strategy patterns lets you create multiple algorithms for specific tasks and lets you decide which algorithm to use at runtime 
+    - define a family of algorithms, encapsulate each one, and make them interchangeable
