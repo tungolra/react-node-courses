@@ -28,4 +28,6 @@
     - take an object, keep its interface, adapt it to new environment or solution; adaptors make incompatible classes become compatible
     - adapting localstorage to nodejs
 - 3.3: using a proxy to use an interface that delays instantiation of expensive object and control requests made to that object
+- 3.5: The Composite pattern: organize objects in a way that treats leafs and branches uniformly
+    - 
 ## Ch 2: Behavioural Patterns 
