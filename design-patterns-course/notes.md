@@ -31,4 +31,6 @@
 - 3.5: The Composite pattern: organize objects in a way that treats leafs and branches uniformly
 - 3.7: Decorator pattern: attach additional responsibilities to an object dynamically as alternative to subclassing for extending functionality
 
-## Ch 2: Behavioural Patterns 
+## Ch 4: Behavioural Patterns 
+- Chain of responsibility pattern: chain together objects to handle a request; handler could pass request to next handler, each handler being able to return a result
+    - avoids coupling the sender of a request with its receiver 
