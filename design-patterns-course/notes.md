@@ -3,7 +3,7 @@
 ## Overview 
 - Gang of Four: 
     - essentials: 
-        - pattern name: describes porblem and solution in a few words
+        - pattern name: describes problem and solution in a few words
         - the problem: should be clearly stated and when pattern should be used
         - the solution: clearly diagrammed and documented 
         - consequences: must define trade-offs when using them 
