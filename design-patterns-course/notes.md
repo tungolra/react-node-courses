@@ -35,4 +35,5 @@
 - 4.1-2: Chain of responsibility pattern: chain together objects to handle a request; handler could pass request to next handler, each handler being able to return a result
     - avoids coupling the sender of a request with its receiver 
 - 4.3: Command pattern: encapsulating request as an object
-    - 
+- 4.6: Iterator pattern: providing a way to access elements of an aggregate object sequentially w/o exposing its underlying representation
+    - designed to work with collections of data by providing way to access first data record and to iterate through rest of the rows in data set 
