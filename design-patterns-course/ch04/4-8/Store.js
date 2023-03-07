@@ -1,13 +1,18 @@
 class Store {
+  constructor(name) {
+    this.name = name;
+    this.subscribers = [];
+  }
 
-    constructor(name) {
-        this.name = name;
-    }
+  subscribe(observer) {
+    this.subscribers.push(observer);
+  }
 
-    sale(discount) {
-        console.log(`Announce sale at ${this.name}, ${discount}% off everything!`);
-    }
-
+  sale(discount) {
+    this.subscribers.forEach((observer) => {
+      observer.notify(this.name, discount);
+    });
+  }
 }
 
 module.exports = Store;
