@@ -10,4 +10,5 @@
 - node --trace_gc stream.js
     - no mark sweep lines
     - using 41mb of memory
+- readstreams read bits of data one chunk at a time, writestreams write data one chunk at a time
 ## Ch 3: HTTP Streaming
