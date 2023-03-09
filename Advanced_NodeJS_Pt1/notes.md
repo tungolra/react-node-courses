@@ -13,4 +13,7 @@
 - readstreams read bits of data one chunk at a time, writestreams write data one chunk at a time
 - backpressure: pushing too much data into stream 
 - high Water Mark: create a sufficiently sized hose to pump data in 
+- duplex streams can be piped between a readable and a writeable stream
+    - typical duplex streams doesnt change anything about the data 
+    - transform streams can
 ## Ch 3: HTTP Streaming
