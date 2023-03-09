@@ -15,5 +15,5 @@
 - high Water Mark: create a sufficiently sized hose to pump data in 
 - duplex streams can be piped between a readable and a writeable stream
     - typical duplex streams doesnt change anything about the data 
-    - transform streams can
+    - transform streams can; used for encrypting/decrypting
 ## Ch 3: HTTP Streaming
