@@ -3,8 +3,10 @@ const { createServer } = require("http");
 const { stat, createReadStream, createWriteStream } = require("fs");
 const { promisify } = require("util");
 
-// use rangeRequests to be compatible with safari; need to parse range header to get start and end bytes
+// multiparty to parse data
+const multiparty = require("multiparty");
 
+// use rangeRequests to be compatible with safari; need to parse range header to get start and end bytes
 const fileName = "../../ch02_advanced_streams/2-1/powder-day.mp4";
 const fileInfo = promisify(stat);
 
@@ -42,11 +44,23 @@ createServer((req, res) => {
   // handle video upload
   if (req.method === "POST") {
     // since req is a readable stream, we can pipe it to a writable stream
-    req.pipe(res);
-    // can also fork stream
-    req.pipe(process.stdout);
-    // can also pipe to a file
-    req.pipe(createWriteStream("uploaded-file.mp4"));
+    // req.pipe(res);
+    // // can also fork stream
+    // req.pipe(process.stdout);
+    // // can also pipe to a file
+    // req.pipe(createWriteStream("uploaded-file.mp4"));
+
+    // use multiparty to parse data
+    let form = new multiparty.Form();
+    // as multiparty parses data, it will emit a part event for each part of the data
+    form.on("part", (part) => {
+      // since part is a readable stream, we'll upload it
+      part.pipe(createWriteStream(`./${part.filename}`)).on("close", () => {
+        res.writeHead(200, { "Content-Type": "text/html" });
+        res.end(`<h1>File uploaded: ${part.filename}</h1>`);
+      });
+    });
+    form.parse(req);
   } else if (req.url === "/video") {
     respondWithVideo(req, res);
   } else {
