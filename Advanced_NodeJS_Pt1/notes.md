@@ -11,4 +11,6 @@
     - no mark sweep lines
     - using 41mb of memory
 - readstreams read bits of data one chunk at a time, writestreams write data one chunk at a time
+- backpressure: pushing too much data into stream 
+- high Water Mark: create a sufficiently sized hose to pump data in 
 ## Ch 3: HTTP Streaming
