@@ -22,4 +22,4 @@ const server = http.createServer((req, res) => {
 })
 
 server.listen(port)
-console.log(`advice service running on port ${port}`)
+console.log(`advise service running on port ${port}`)
