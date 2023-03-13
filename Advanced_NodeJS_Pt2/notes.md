@@ -28,5 +28,10 @@
     - cloud services like aws, heroku, cloudflare, azure have tools that manage clusters baked into environment
 
 ### Database Scaling
-
+- quickly use a database <code>npm i node-localstorage</code>
+- when to use sharding: 
+    - too much data
+    - more write operations than the server can handle
+    - when you experience slow performance
+- each database has own tools/patterns for partitioning database 
 ### Microservices
