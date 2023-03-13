@@ -35,3 +35,17 @@
     - when you experience slow performance
 - each database has own tools/patterns for partitioning database 
 ### Microservices
+- <code>curl http://localhost:3000</code> make a request for the ticket-system
+- split dbs by reservation and shows
+- split ticket-system into show.js and reservations.js
+- can orchestrate services by: 
+    - API orchestration: provide single API to interact with all clients and orchestrate microservices req'd to perform an action 
+    - Messaging Layer: like a backdoor to your service; customers come in from front door; goods purchased from other businesses delivered through back door; messaging layer is usually a TCP application used to communicate with other microservices, i.e. customers checkout with checkout service, and checkout service updates that action on messaging layer, which, in turn, reserve the seats for the show
+- Fault Tolerance: 
+
+#### Further Learning 
+Popular messaging queues to integrate services
+- RabbitMQ
+- Apache Kafka
+- Learning Redis 
+- Microsoft Azure
