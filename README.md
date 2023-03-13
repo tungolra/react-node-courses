@@ -19,4 +19,8 @@ This repo is a collection of exercises from courses teaching the use of NodeJS.
   - Work with four different types of streams: readable, writable, duplex, and transform
   - Learn to minimize backpressure in data transmission
   - Built an HTTP server for streaming video over browser, make it cross-browser compatible, and collect multipart/form-data from the upload stream
-- [ ] Advanced NodeJS Pt 2: Scaling Applications
+- [x] Advanced NodeJS Pt 2: Scaling Applications
+  - Scaling with NodeJS via cloning, database scaling, and microservices
+  - Working with clusters using PM2
+  - Setting up horizontal partitioning to split data between databases
+  - Orchestrating services via API orchestration
