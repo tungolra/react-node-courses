@@ -1,8 +1,8 @@
-# NodeJS Courses
+# LinkedIn Learning Courses in React and Node
 
 ### About
 
-This repo is a collection of exercises from courses teaching the use of NodeJS.
+This repo is a collection of LinkedIn Learning Courses for further learning on React and Node.js.
 
 ## In this repo:
 
@@ -24,3 +24,10 @@ This repo is a collection of exercises from courses teaching the use of NodeJS.
   - Working with clusters using PM2
   - Setting up horizontal partitioning to split data between databases
   - Orchestrating services via API orchestration
+- [ ] Build Production Ready Apps in React
+  - Building a single-page application efficiently, using built-in utilities and out-of-the-box tools.
+  - Explore tools to help you move from stateless to stateful React components, and go over how to use the Context API to manage the state of your app.
+  - Add the Firebase to your React project, then connect to a Cloud Firestore database. 
+    - Dive into functionality like creating a bucket to store images, authenticating and managing users, and implementing client-side routing with React-Router V6
+    - Learn about filtering, searching, and debugging. 
+    - Deploy React app using Firebase Hosting.
