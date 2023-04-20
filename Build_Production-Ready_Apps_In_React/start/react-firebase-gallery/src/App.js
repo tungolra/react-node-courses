@@ -14,13 +14,34 @@ const initialState = {
   isCollapsed: false,
 };
 
+const handleChange = (state, e) => {
+  if (e.target.name === "file") {
+    return {
+      ...state.inputs,
+      file: e.target.files[0],
+      path: URL.createObjectURL(e.target.files[0]),
+    };
+  } else {
+    return { ...state.inputs, title: e.target.value };
+  }
+};
+
 function reducer(state, action) {
   switch (action.type) {
     case "setItem":
       return {
         ...state,
-        items: [action.payload, ...state.items],
-        count: state.count + 1,
+        items: [state.inputs, ...state.items],
+      };
+    case "setInputs":
+      return {
+        ...state,
+        inputs: handleChange(state, action.payload.value)
+      };
+    case "collapse":
+      return {
+        ...state,
+        isCollapsed: action.payload.bool
       };
 
     default:
@@ -30,39 +51,28 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
-  const [inputs, setInputs] = React.useState({
-    title: null,
-    file: null,
-    path: null,
-  });
-  const [items, setItems] = React.useState(photos);
+  // const [inputs, setInputs] = React.useState({
+  //   title: null,
+  //   file: null,
+  //   path: null,
+  // });
+  // const [items, setItems] = React.useState(photos);
   const [count, setCount] = React.useState("");
-  const [isCollapsed, collapse] = React.useState(false);
+  // const [isCollapsed, collapse] = React.useState(false);
 
-  const toggle = () => collapse(!isCollapsed);
+  const toggle = (bool) => dispatch({ type: "collapse", payload: { bool: !state.isCollapsed } })
 
   const handleChange = (e) => {
-    if (e.target.name === "file") {
-      setInputs({
-        ...inputs,
-        file: e.target.files[0],
-        path: URL.createObjectURL(e.target.files[0]),
-      });
-    } else {
-      setInputs({ ...inputs, title: e.target.value });
-    }
+    dispatch({ type: "setInputs", payload: { value: e } });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
     // setItems([inputs.path, ...items]);
-    dispatch({ type: "setItem", payload: { path: inputs.path } });
-    setInputs({ title: null, file: null, path: null });
-    collapse(false);
+    dispatch({ type: "setItem" });
+    // setInputs({ title: null, file: null, path: null });
+    // collapse(false);
+    toggle(!state.isCollapsed)
   };
-
-  React.useEffect(() => {
-    console.log(state)
-  }, [state.items]);
 
   React.useEffect(() => {
     setCount(
@@ -70,7 +80,7 @@ function App() {
         state.items.length !== 1 ? "s" : ""
       } in your gallery`
     );
-  }, [items]);
+  }, [state.items]);
   return (
     <>
       {/* NavBar */}
@@ -78,14 +88,14 @@ function App() {
       {/* Home Page */}
       <div className="container text-center mt-5">
         <p className="display-9">{count}</p>
-        <button className="btn btn-success float-end" onClick={toggle}>
-          {!isCollapsed ? "Add" : "Collapse"}
+        <button className="btn btn-success float-end" onClick={() => toggle(!state.isCollapsed)}>
+          {!state.isCollapsed ? "Add" : "Collapse"}
         </button>
         <UploadForm
-          isVisible={isCollapsed}
+          isVisible={state.isCollapsed}
           onChange={handleChange}
           onSubmit={handleSubmit}
-          inputs={inputs}
+          inputs={state.inputs}
         />
         <h1>Gallery</h1>
         <div className="row">
