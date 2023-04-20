@@ -1,13 +1,13 @@
 import React from "react";
 
-export default function Card({ photo }) {
+export default function Card({ path, title }) {
   return (
     <div className="col mb-5">
       <div className="card" style={{ width: "18rem" }}>
         <img
-          src={photo}
+          src={path}
           className="card-img-top"
-          alt={photo}
+          alt={title}
         />
       </div>
     </div>

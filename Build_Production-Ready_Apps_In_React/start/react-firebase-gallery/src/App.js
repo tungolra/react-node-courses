@@ -6,6 +6,7 @@ import Card from "./components/Card";
 import UploadForm from "./components/UploadForm";
 
 import { photos } from "./data";
+import Layout from "./components/Layout";
 
 const initialState = {
   items: photos,
@@ -31,17 +32,19 @@ function reducer(state, action) {
     case "setItem":
       return {
         ...state,
+        count: state.items.length + 1,
         items: [state.inputs, ...state.items],
+        inputs: { title: null, file: null, path: null },
       };
     case "setInputs":
       return {
         ...state,
-        inputs: handleChange(state, action.payload.value)
+        inputs: handleChange(state, action.payload.value),
       };
     case "collapse":
       return {
         ...state,
-        isCollapsed: action.payload.bool
+        isCollapsed: action.payload.bool,
       };
 
     default:
@@ -51,59 +54,41 @@ function reducer(state, action) {
 
 function App() {
   const [state, dispatch] = React.useReducer(reducer, initialState);
-  // const [inputs, setInputs] = React.useState({
-  //   title: null,
-  //   file: null,
-  //   path: null,
-  // });
-  // const [items, setItems] = React.useState(photos);
-  const [count, setCount] = React.useState("");
-  // const [isCollapsed, collapse] = React.useState(false);
+  // const [count, setCount] = React.useState("");
 
-  const toggle = (bool) => dispatch({ type: "collapse", payload: { bool: !state.isCollapsed } })
+  const toggle = (bool) => dispatch({ type: "collapse", payload: { bool } });
 
   const handleChange = (e) => {
     dispatch({ type: "setInputs", payload: { value: e } });
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setItems([inputs.path, ...items]);
     dispatch({ type: "setItem" });
-    // setInputs({ title: null, file: null, path: null });
-    // collapse(false);
-    toggle(!state.isCollapsed)
+    toggle(!state.isCollapsed);
   };
 
-  React.useEffect(() => {
-    setCount(
-      `You have ${state.items.length} photo${
-        state.items.length !== 1 ? "s" : ""
-      } in your gallery`
-    );
-  }, [state.items]);
+  const count = React.useMemo(() => { 
+    return `You have ${state.items.length} photo${
+      state.items.length !== 1 ? "s" : ""
+    } in your gallery`;
+  })
+
   return (
     <>
-      {/* NavBar */}
-      <NavBar />
-      {/* Home Page */}
-      <div className="container text-center mt-5">
-        <p className="display-9">{count}</p>
-        <button className="btn btn-success float-end" onClick={() => toggle(!state.isCollapsed)}>
-          {!state.isCollapsed ? "Add" : "Collapse"}
-        </button>
-        <UploadForm
-          isVisible={state.isCollapsed}
-          onChange={handleChange}
-          onSubmit={handleSubmit}
-          inputs={state.inputs}
-        />
+      <Layout
+        state={state}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+        toggle={toggle}
+      >
         <h1>Gallery</h1>
+        {count}
         <div className="row">
           {state.items.map((photo, i) => (
-            <Card photo={photo.path} key={i} />
+            <Card {...photo} key={i} />
           ))}
         </div>
-      </div>
+      </Layout>
     </>
   );
 }
