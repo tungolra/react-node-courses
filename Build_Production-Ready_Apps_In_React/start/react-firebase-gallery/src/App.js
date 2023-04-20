@@ -7,7 +7,29 @@ import UploadForm from "./components/UploadForm";
 
 import { photos } from "./data";
 
+const initialState = {
+  items: photos,
+  count: photos.length,
+  inputs: { title: null, file: null, path: null },
+  isCollapsed: false,
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "setItem":
+      return {
+        ...state,
+        items: [action.payload, ...state.items],
+        count: state.count + 1,
+      };
+
+    default:
+      return state;
+  }
+}
+
 function App() {
+  const [state, dispatch] = React.useReducer(reducer, initialState);
   const [inputs, setInputs] = React.useState({
     title: null,
     file: null,
@@ -32,15 +54,20 @@ function App() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    setItems([inputs.path, ...items]);
+    // setItems([inputs.path, ...items]);
+    dispatch({ type: "setItem", payload: { path: inputs.path } });
     setInputs({ title: null, file: null, path: null });
     collapse(false);
   };
 
   React.useEffect(() => {
+    console.log(state)
+  }, [state.items]);
+
+  React.useEffect(() => {
     setCount(
-      `You have ${items.length} photo${
-        items.length > 1 ? "s" : ""
+      `You have ${state.items.length} photo${
+        state.items.length !== 1 ? "s" : ""
       } in your gallery`
     );
   }, [items]);
@@ -62,8 +89,8 @@ function App() {
         />
         <h1>Gallery</h1>
         <div className="row">
-          {items.map((photo, i) => (
-            <Card photo={photo} key={i} />
+          {state.items.map((photo, i) => (
+            <Card photo={photo.path} key={i} />
           ))}
         </div>
       </div>
