@@ -54,35 +54,17 @@ import { Context } from "./context";
 // }
 
 function App() {
-  // const [state, dispatch] = React.useReducer(reducer, initialState);
-  // const [count, setCount] = React.useState("");
-  const {state, dispatch} = React.useContext(Context)
+  const { state } = React.useContext(Context);
 
-  const toggle = (bool) => dispatch({ type: "collapse", payload: { bool } });
-
-  const handleChange = (e) => {
-    dispatch({ type: "setInputs", payload: { value: e } });
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch({ type: "setItem" });
-    toggle(!state.isCollapsed);
-  };
-
-  const count = React.useMemo(() => { 
+  const count = React.useMemo(() => {
     return `You have ${state.items.length} photo${
       state.items.length !== 1 ? "s" : ""
     } in your gallery`;
-  })
+  });
 
   return (
     <>
-      <Layout
-        state={state}
-        onChange={handleChange}
-        onSubmit={handleSubmit}
-        toggle={toggle}
-      >
+      <Layout>
         <h1>Gallery</h1>
         {count}
         <div className="row">

@@ -1,7 +1,7 @@
-import React, { createContext } from "react";
+import React from "react";
 import { photos } from "./data";
 
-export const Context = createContext();
+export const Context = React.createContext();
 
 const initialState = {
   items: photos,

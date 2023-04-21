@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Context } from "../context";
 
-const Preview = ({ path }) => {
+const Preview = () => {
+  const { state } = useContext(Context);
   return (
-    path && (
+    state.inputs.path && (
       <div
         className="rounded p-1 m-5"
         style={{
           width: "30%",
           height: "300px",
-          backgroundImage: `url(${path}`,
+          backgroundImage: `url(${state.inputs.path}`,
           backgroundSize: "cover",
         }}
       ></div>
@@ -16,20 +18,32 @@ const Preview = ({ path }) => {
   );
 };
 
-const UploadForm = ({ isVisible, onChange, onSubmit, inputs }) => {
+const UploadForm = () => {
+  const { state, dispatch } = useContext(Context);
+
+  const handleChange = (e) =>
+    dispatch({ type: "setInputs", payload: { value: e } });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch({ type: "setItem" });
+    dispatch({ type: "collapse", payload: { bool: false } });
+  };
+
   const isDisabled = React.useMemo(() => {
-    return !!Object.values(inputs).some((input) => !input);
-  }, [inputs]);
+    return !!Object.values(state.inputs).some((input) => !input);
+  }, [state.inputs]);
+
   return (
-    isVisible && (
+    state.isCollapsed && (
       <>
         <p className="display-6 text-center mb-3">Upload Stock Image</p>
         <div className="mb-5 d-flex align-items-center justify-content-center">
-          <Preview {...inputs} />
+          <Preview {...state.inputs} />
           <form
             className="mb-2"
             style={{ textAlign: "left" }}
-            onSubmit={onSubmit}
+            onSubmit={handleSubmit}
           >
             <div className="mb-3">
               <input
@@ -38,7 +52,7 @@ const UploadForm = ({ isVisible, onChange, onSubmit, inputs }) => {
                 name="title"
                 placeholder="title"
                 aria-describedby="text"
-                onChange={onChange}
+                onChange={handleChange}
               />
             </div>
             <div className="mb-3">
@@ -46,7 +60,7 @@ const UploadForm = ({ isVisible, onChange, onSubmit, inputs }) => {
                 type="file"
                 className="form-control"
                 name="file"
-                onChange={onChange}
+                onChange={handleChange}
               />
             </div>
             <button
