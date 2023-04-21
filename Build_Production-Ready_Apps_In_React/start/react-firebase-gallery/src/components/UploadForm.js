@@ -1,5 +1,8 @@
 import React, { useContext } from "react";
 import { Context } from "../context";
+import Firestore from "../utils/firestore";
+
+const { writeDoc } = Firestore;
 
 const Preview = () => {
   const { state } = useContext(Context);
@@ -20,12 +23,14 @@ const Preview = () => {
 
 const UploadForm = () => {
   const { state, dispatch } = useContext(Context);
+  const { inputs } = state;
 
   const handleChange = (e) =>
     dispatch({ type: "setInputs", payload: { value: e } });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    writeDoc(state.inputs, "stocks").then(console.log);
     dispatch({ type: "setItem" });
     dispatch({ type: "collapse", payload: { bool: false } });
   };
