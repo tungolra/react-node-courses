@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Context } from "../context";
 import Firestore from "../utils/firestore";
-
-
+import Storage from "../utils/storage";
 
 const { writeDoc } = Firestore;
+const { uploadFile } = Storage;
 
 const Preview = () => {
   const { state } = useContext(Context);
@@ -32,9 +32,11 @@ const UploadForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    writeDoc(state.inputs, "stocks").then(console.log);
-    dispatch({ type: "setItem" });
-    dispatch({ type: "collapse", payload: { bool: false } });
+    uploadFile(state.inputs).then((media) => {
+      writeDoc(state.inputs, "stocks").then(console.log);
+      dispatch({ type: "setItem" });
+      dispatch({ type: "collapse", payload: { bool: false } });
+    });
   };
 
   const isDisabled = React.useMemo(() => {
