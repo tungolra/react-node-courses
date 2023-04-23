@@ -6,8 +6,9 @@ const Context = createContext();
 
 const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
+
   const login = () => {
-    signIn().then((user) => setCurrentUser(user));
+    signIn().then(setCurrentUser);
   };
   const logout = () => {
     signOut().then(() => setCurrentUser(null));
@@ -19,7 +20,7 @@ const AuthProvider = ({ children }) => {
       currentUser,
     };
   }, [currentUser, login, logout]);
-  return <Context.Provider value={{}}> {children}</Context.Provider>;
+  return <Context.Provider value={value}> {children}</Context.Provider>;
 };
 
 export const useAuthContext = () => {

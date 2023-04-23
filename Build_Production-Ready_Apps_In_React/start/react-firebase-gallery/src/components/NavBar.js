@@ -1,4 +1,27 @@
 import React from "react";
+import { useAuthContext } from "../context/authContext";
+
+const LogIn = () => {
+  const { login, currentUser } = useAuthContext();
+  return (
+    !currentUser && (
+      <button type="button" className="btn btn-warning" onClick={login}>
+        Log In
+      </button>
+    )
+  );
+};
+
+const LogOut = () => {
+  const { logout, currentUser } = useAuthContext();
+  return (
+    !!currentUser && (
+      <button type="button" className="btn btn-danger" onClick={logout}>
+        Log Out
+      </button>
+    )
+  );
+};
 
 function SearchForm() {
   return (
@@ -23,31 +46,26 @@ function Dropdown() {
         <a
           className="nav-link dropdown-toggle"
           href="#"
+          id="navbarDropdown"
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Dropdown
+          Login
         </a>
-        <ul className="dropdown-menu">
+        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
           <li>
-            <a className="dropdown-item" href="#">
-              Action
+            <a className="dropdown-item text-center" href="#">
+              Profile
             </a>
+            <li>
+              <hr className="dropdown divider" />
+            </li>
           </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Another action
-            </a>
-          </li>
-          <li>
-            <hr className="dropdown-divider" />
-          </li>
-          <li>
-            <a className="dropdown-item" href="#">
-              Something else here
-            </a>
-          </li>
+          <div className="d-flex justify-content-center">
+            <LogIn />
+            <LogOut />
+          </div>
         </ul>
       </li>
     </ul>
