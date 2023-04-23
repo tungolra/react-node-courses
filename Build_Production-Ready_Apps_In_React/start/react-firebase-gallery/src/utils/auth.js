@@ -8,7 +8,7 @@ import { auth } from "../lib/firebase.config";
 
 const provider = new GoogleAuthProvider();
 
-const FirebaseAuth = {
+export const FirebaseAuth = {
   signIn: () => {
     return new Promise((resolve) => {
       signInWithPopup(auth, provider)

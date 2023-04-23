@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Context } from "../context";
+import { Context } from "../context/firestoreContext";
 import Firestore from "../utils/firestore";
 import Storage from "../utils/storage";
 

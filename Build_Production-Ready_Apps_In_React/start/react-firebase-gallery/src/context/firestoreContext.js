@@ -1,6 +1,6 @@
 import React from "react";
-import { photos } from "./data";
-import Firestore from "./utils/firestore";
+import { photos } from "../data";
+import Firestore from "../utils/firestore";
 
 const { readDocs } = Firestore;
 
