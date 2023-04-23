@@ -10,11 +10,8 @@ export default function Layout({ children }) {
 
   return (
     <>
-      {/* NavBar */}
       <NavBar />
-      {/* Home Page */}
       <div className="container text-center mt-5">
-        <p className="display-9">{state.count}</p>
         <button
           className="btn btn-success float-end"
           onClick={() => toggle(!state.isCollapsed)}

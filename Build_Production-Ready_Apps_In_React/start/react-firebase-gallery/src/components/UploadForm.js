@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import { Context } from "../context";
 import Firestore from "../utils/firestore";
 
+
+
 const { writeDoc } = Firestore;
 
 const Preview = () => {
