@@ -2,12 +2,15 @@ import React, { useContext } from "react";
 import { Context } from "../context/firestoreContext";
 import Firestore from "../utils/firestore";
 import Storage from "../utils/storage";
+import { useAuthContext } from "../context/authContext";
 
 const { writeDoc } = Firestore;
 const { uploadFile, downloadFile } = Storage;
 
 const Preview = () => {
   const { state } = useContext(Context);
+  const { currentUser } = useAuthContext();
+
   return (
     state.inputs.path && (
       <div
@@ -24,8 +27,9 @@ const Preview = () => {
 };
 
 const UploadForm = () => {
-  const { state, dispatch } = useContext(Context);
-  const { inputs } = state;
+  const { state, dispatch, read } = useContext(Context);
+  const { currentUser } = useAuthContext();
+  const username = currentUser?.displayName;
 
   const handleChange = (e) =>
     dispatch({ type: "setInputs", payload: { value: e } });
@@ -35,10 +39,13 @@ const UploadForm = () => {
     uploadFile(state.inputs)
       .then(downloadFile)
       .then((url) => {
-        writeDoc({ ...state.inputs, path: url }, "stocks").then(() => {
-          dispatch({ type: "setItem" });
-          dispatch({ type: "collapse", payload: { bool: false } });
-        });
+        writeDoc({ ...state.inputs, path: url, user: username }, "stocks").then(
+          () => {
+            read();
+            // dispatch({ type: "setItem" });
+            dispatch({ type: "collapse", payload: { bool: false } });
+          }
+        );
       });
   };
 

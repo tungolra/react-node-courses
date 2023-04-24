@@ -4,11 +4,12 @@ import "./App.css";
 import Card from "./components/Card";
 import Layout from "./components/Layout";
 import { Context } from "./context/firestoreContext";
+import { useAuthContext } from "./context/authContext";
 import Firestore from "./utils/firestore";
 
 function App() {
   const { state, read } = React.useContext(Context);
-
+  const { authenticate } = useAuthContext();
   const count = React.useMemo(() => {
     return `You have ${state.items.length} photo${
       state.items.length !== 1 ? "s" : ""
@@ -17,7 +18,8 @@ function App() {
 
   //test getDocs
   React.useEffect(() => {
-    read().then(console.log);
+    read();
+    authenticate();
   }, []);
 
   return (

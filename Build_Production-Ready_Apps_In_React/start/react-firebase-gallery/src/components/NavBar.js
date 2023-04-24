@@ -40,6 +40,17 @@ function SearchForm() {
 }
 
 function Dropdown() {
+  const { currentUser } = useAuthContext() 
+  const username = React.useMemo(() => { 
+    return currentUser?.displayName || "Profile";
+  }, [currentUser])
+
+  const avatar = React.useMemo(() => {
+    return !!currentUser ?
+    <img className="avatar" src={currentUser?.photoURL} alt={currentUser?.displayName } width="34" height="34"/> :
+     "Login"
+  }, [currentUser])
+
   return (
     <ul className="navbar-nav mb-2 mb-lg-0">
       <li className="nav-item dropdown">
@@ -51,12 +62,12 @@ function Dropdown() {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Login
+          {avatar}
         </a>
         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
           <li>
             <a className="dropdown-item text-center" href="#">
-              Profile
+              {username}
             </a>
             <li>
               <hr className="dropdown divider" />
@@ -72,7 +83,7 @@ function Dropdown() {
   );
 }
 
-function NavItem() {
+function HomeNav() {
   return (
     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
       <li className="nav-item">
@@ -86,7 +97,7 @@ function NavItem() {
 
 export default function NavBar() {
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light mb-5">
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
           React/Firebase Gallery
@@ -103,7 +114,7 @@ export default function NavBar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <NavItem />
+          <HomeNav />
           <SearchForm />
           <Dropdown />
         </div>

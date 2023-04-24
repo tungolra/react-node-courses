@@ -28,6 +28,14 @@
   color: #61dafb;
 }
 
+.navbar-expand-lg .navbar-nav .dropdown-menu {
+  left: -5rem;
+}
+
+.avatar {
+  border-radius: 50%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

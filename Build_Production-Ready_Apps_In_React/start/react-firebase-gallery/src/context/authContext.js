@@ -1,7 +1,7 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import { FirebaseAuth } from "../utils/auth";
 
-const { signIn, signOut } = FirebaseAuth;
+const { signIn, signOut, getCurrentUser } = FirebaseAuth;
 const Context = createContext();
 
 const AuthProvider = ({ children }) => {
@@ -13,10 +13,12 @@ const AuthProvider = ({ children }) => {
   const logout = () => {
     signOut().then(() => setCurrentUser(null));
   };
+  const authenticate = () => getCurrentUser().then(setCurrentUser);
   const value = useMemo(() => {
     return {
       login,
       logout,
+      authenticate,
       currentUser,
     };
   }, [currentUser, login, logout]);

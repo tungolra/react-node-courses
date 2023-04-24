@@ -1,7 +1,7 @@
 import { P } from "morse/map";
 import React from "react";
 
-export default function Card({ path, title, createdAt }) {
+export default function Card({ path, title, createdAt, user }) {
   const timestamp = React.useMemo(() => {
     const date = new Date(createdAt.seconds * 1000);
     return date.toLocaleDateString();
@@ -20,7 +20,7 @@ export default function Card({ path, title, createdAt }) {
         <h5 className="text-center">{title}</h5>
         <div className="d-flex justify-content-between px-2">
           <p className="text-center ">{timestamp}</p>
-          <i>@username</i>
+          <i>@{user}</i>
         </div>
       </div>
     </div>
