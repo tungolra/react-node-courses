@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import AuthProvider, { useAuthContext } from "./context/authContext";
 import Provider from "./context/firestoreContext";
 import Layout from "./components/Layout";
+import Single from "./components/Single";
 
 import StockImages from "./components/StockImages";
 function AppRoutes() {
@@ -15,6 +16,7 @@ function AppRoutes() {
     <>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/images/:id" element={<Single />} />
         {currentUser && <Route path="/stockimages" element={<StockImages />} />}
       </Routes>
     </>
