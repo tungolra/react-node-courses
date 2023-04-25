@@ -62,8 +62,14 @@ const Provider = ({ children }) => {
     dispatch({ type: "setItems", payload: { items } });
   };
   return (
-    <Context.Provider value={{ state, dispatch, read }}>{children}</Context.Provider>
+    <Context.Provider value={{ state, dispatch, read }}>
+      {children}
+    </Context.Provider>
   );
+};
+
+export const useFireStoreContext = () => {
+  return React.useContext(Context);
 };
 
 export default Provider;

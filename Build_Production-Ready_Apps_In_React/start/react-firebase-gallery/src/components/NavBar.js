@@ -1,5 +1,6 @@
 import React from "react";
 import { useAuthContext } from "../context/authContext";
+import { Link } from "react-router-dom";
 
 const LogIn = () => {
   const { login, currentUser } = useAuthContext();
@@ -40,16 +41,24 @@ function SearchForm() {
 }
 
 function Dropdown() {
-  const { currentUser } = useAuthContext() 
-  const username = React.useMemo(() => { 
+  const { currentUser } = useAuthContext();
+  const username = React.useMemo(() => {
     return currentUser?.displayName || "Profile";
-  }, [currentUser])
+  }, [currentUser]);
 
   const avatar = React.useMemo(() => {
-    return !!currentUser ?
-    <img className="avatar" src={currentUser?.photoURL} alt={currentUser?.displayName } width="34" height="34"/> :
-     "Login"
-  }, [currentUser])
+    return !!currentUser ? (
+      <img
+        className="avatar"
+        src={currentUser?.photoURL}
+        alt={currentUser?.displayName}
+        width="34"
+        height="34"
+      />
+    ) : (
+      "Login"
+    );
+  }, [currentUser]);
 
   return (
     <ul className="navbar-nav mb-2 mb-lg-0">
@@ -83,13 +92,25 @@ function Dropdown() {
   );
 }
 
-function HomeNav() {
+function Navigation() {
+  const { currentUser } = useAuthContext();
   return (
     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
       <li className="nav-item">
-        <a className="nav-link active" aria-current="page" href="#">
+        <Link className="nav-link active" aria-current="page" to="/">
           Home
-        </a>
+        </Link>
+      </li>
+      <li className="nav-item">
+        {currentUser && (
+          <Link
+            className="nav-link active"
+            aria-current="page"
+            to="/stockimages"
+          >
+            My Stock Images
+          </Link>
+        )}
       </li>
     </ul>
   );
@@ -114,7 +135,7 @@ export default function NavBar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <HomeNav />
+          <Navigation />
           <SearchForm />
           <Dropdown />
         </div>

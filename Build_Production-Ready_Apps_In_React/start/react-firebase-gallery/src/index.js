@@ -1,19 +1,34 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import AuthProvider from "./context/authContext";
+import AuthProvider, { useAuthContext } from "./context/authContext";
 import Provider from "./context/firestoreContext";
+import Layout from "./components/Layout";
 
+import StockImages from "./components/StockImages";
+function AppRoutes() {
+  const { currentUser } = useAuthContext();
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<App />} />
+        {currentUser && <Route path="/stockimages" element={<StockImages />} />}
+      </Routes>
+    </>
+  );
+}
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <AuthProvider>
       <Provider>
         <Router>
-          <App />
+          <Layout>
+            <AppRoutes />
+          </Layout>
         </Router>
       </Provider>
     </AuthProvider>
