@@ -25,13 +25,24 @@ const LogOut = () => {
 };
 
 function SearchForm() {
+  const [text, search] = React.useState(null);
+
+  const handleChange = (e) => {
+    search(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("searching: ", text);
+  };
   return (
-    <form className="d-flex" role="search">
+    <form className="d-flex" role="search" onSubmit={handleSubmit}>
       <input
         className="form-control me-2"
         type="search"
         placeholder="Search"
         aria-label="Search"
+        onChange={handleChange}
       />
       <button className="btn btn-outline-success" type="submit">
         Search
@@ -122,9 +133,7 @@ function Navigation() {
       {currentUser && (
         <li className="nav-item">
           <Link
-            className={`nav-link ${
-              pathname === "/profile" ? "active" : ""
-            }`}
+            className={`nav-link ${pathname === "/profile" ? "active" : ""}`}
             aria-current="page"
             to="/profile"
           >

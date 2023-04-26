@@ -8,6 +8,7 @@ export const Context = React.createContext();
 
 const initialState = {
   items: photos,
+  placeholders: photos,
   count: photos.length,
   inputs: { title: null, file: null, path: null },
   isCollapsed: false,
@@ -34,10 +35,16 @@ function reducer(state, action) {
         items: [state.inputs, ...state.items],
         inputs: { title: null, file: null, path: null },
       };
+    case "filterItems":
+      return {
+        ...state,
+        items: action.payload.results,
+      };
     case "setItems":
       return {
         ...state,
         items: action.payload.items,
+        placeholders: action.payload.items,
       };
     case "setInputs":
       return {
@@ -60,6 +67,19 @@ const Provider = ({ children }) => {
   const read = async () => {
     const items = await readDocs("stocks");
     dispatch({ type: "setItems", payload: { items } });
+    const filterItems = (input) => {
+      if (input === "" || !!input) {
+        dispatch({ type: "setItems", payload: { items: state.placeholders } });
+      }
+      // create new array with subelements array concatenated
+      let list = state.placeholders.flat();
+      let results = list.filter((item) => {
+        const name = item.title.toLowerCase();
+        const search = input.toLowerCase();
+        return name.indexOf(search) > -1;
+      });
+      dispatch({ type: "filterItems", payload: { results } });
+    };
   };
   return (
     <Context.Provider value={{ state, dispatch, read }}>
