@@ -8,6 +8,8 @@ import AuthProvider, { useAuthContext } from "./context/authContext";
 import Provider from "./context/firestoreContext";
 import Layout from "./components/Layout";
 import Single from "./components/Single";
+import NotFound from "./components/NotFound";
+import Profile from "./components/Profile";
 
 import StockImages from "./components/StockImages";
 function AppRoutes() {
@@ -17,6 +19,8 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/images/:id" element={<Single />} />
+        <Route path="/profile" element={<Profile />}></Route>
+        <Route path="*" element={<NotFound />} />
         {currentUser && <Route path="/stockimages" element={<StockImages />} />}
       </Routes>
     </>
