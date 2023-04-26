@@ -24,7 +24,7 @@ This repo is a collection of LinkedIn Learning Courses for further learning on R
   - Working with clusters using PM2
   - Setting up horizontal partitioning to split data between databases
   - Orchestrating services via API orchestration
-- [ ] Build Production Ready Apps in React
+- [x] Build Production Ready Apps in React
   - Building a single-page application efficiently, using built-in utilities and out-of-the-box tools.
   - Explore tools to help you move from stateless to stateful React components, and go over how to use the Context API to manage the state of your app.
   - Add the Firebase to your React project, then connect to a Cloud Firestore database. 
