@@ -67,22 +67,30 @@ const Provider = ({ children }) => {
   const read = async () => {
     const items = await readDocs("stocks");
     dispatch({ type: "setItems", payload: { items } });
-    const filterItems = (input) => {
-      if (input === "" || !!input) {
-        dispatch({ type: "setItems", payload: { items: state.placeholders } });
-      }
-      // create new array with subelements array concatenated
-      let list = state.placeholders.flat();
-      let results = list.filter((item) => {
-        const name = item.title.toLowerCase();
-        const search = input.toLowerCase();
-        return name.indexOf(search) > -1;
-      });
-      dispatch({ type: "filterItems", payload: { results } });
-    };
   };
+  const filterItems = (input) => {
+    if (input === "" || !!input) {
+      dispatch({ type: "setItems", payload: { items: state.placeholders } });
+    }
+    // create new array with subelements array concatenated
+    let list = state.placeholders.flat();
+    let results = list.filter((item) => {
+      const name = item.title.toLowerCase();
+      const search = input.toLowerCase();
+      return name.indexOf(search) > -1;
+    });
+    dispatch({ type: "filterItems", payload: { results } });
+  };
+  const value = React.useMemo(() => {
+    return {
+      state,
+      dispatch,
+      read,
+      filterItems,
+    };
+  }, [state, dispatch, read, filterItems]);
   return (
-    <Context.Provider value={{ state, dispatch, read }}>
+    <Context.Provider value={value}>
       {children}
     </Context.Provider>
   );

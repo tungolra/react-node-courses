@@ -1,6 +1,7 @@
 import React from "react";
 import { useAuthContext } from "../context/authContext";
 import { Link, useLocation } from "react-router-dom";
+import { useFireStoreContext } from "../context/firestoreContext";
 
 const LogIn = () => {
   const { login, currentUser } = useAuthContext();
@@ -26,14 +27,17 @@ const LogOut = () => {
 
 function SearchForm() {
   const [text, search] = React.useState(null);
+  const { filterItems } = useFireStoreContext();
 
   const handleChange = (e) => {
     search(e.target.value);
+    // search while user is typing
+    filterItems(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("searching: ", text);
+    filterItems(text);
   };
   return (
     <form className="d-flex" role="search" onSubmit={handleSubmit}>
